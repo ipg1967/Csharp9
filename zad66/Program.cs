@@ -1,26 +1,24 @@
-﻿// Задача 66: Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.
+﻿// Задача 66: Задайте значения M и N. Напишите программу, которая найдёт сумму 
+// натуральных элементов в промежутке от M до N.
 // M = 1; N = 15 -> 120
 // M = 4; N = 8. -> 30
 
-int ReadInt(string text)
+int[] ReadInt(string text)
 {
     System.Console.Write(text);
-    return Convert.ToInt32(Console.ReadLine());
+    return Array.ConvertAll(Console.ReadLine()!.Split(","), int.Parse); ;
 }
-
-int Recurse(int number)
+// возвращаем очередной  M пока не достигнем N
+int RecurseSumMN(int M, int N)
 {
-    if (number < 1)
+    if (M == N)
     {
-        return 0;
+        return N;
     }
-
-    return number%10 + Recurse(number/10);
-
+    return M + RecurseSumMN(M + 1, N);
 }
 
 // ---------------------------------------
 
-int number = ReadInt("Введите число: ");
-
-System.Console.WriteLine(Recurse(Math.Abs(number)));
+int[] number = ReadInt("Задайте начальное и конечное значения через запятую: ");
+System.Console.WriteLine(RecurseSumMN(number[0], number[1]));
